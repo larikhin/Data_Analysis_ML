@@ -3,6 +3,8 @@ MIN/MAX (выражение)
 AVG (numbers)
 SUM (numbers)
 
+SELECT
+FROM
 WHERE фильтрация аргументов перед функцией
 GROUP BY группировка
 HAVING фильтрация результатов вычисления функции
@@ -50,3 +52,48 @@ SELECT sum(grade) FROM Exam_Result where studentid = '345588'
 SELECT StudentId, COUNT(*) FROM Exam_Result GROUP BY StudentId
 SELECT StudentId, COUNT(DISTINCT Grade) FROM Exam_Result GROUP BY StudentId
 SELECT StudentId FROM Exam_Result GROUP BY StudentId HAVING avg(grade) = 5
+
+Вложенный запрос 
+для соединения или сопоставления нескольких таблиц
+после 
+SELECT
+WHERE 
+HAVING
+в скобки
+SELECT studentname, birthdate from students WHERE birthdate=(SELECT max(birthdate) FROM students)
+
+SELECT groupcode FROM st_group WHERE specialization='Nanotechnology'
+SELECT studentname FROM students WHERE groupcode='M2020_1'
+equal
+SELECT studentname FROM students WHERE groupcode=(SELECT groupcode FROM st_group WHERE specialization='Nanotechnology')
+
+SELECT groupcode FROM st_group WHERE specialization='Nanotechnology' or specialization='Health Research'
+SELECT groupcode FROM st_group WHERE specialization IN ('Nanotechnology','Health Research')
+SELECT studentname FROM students WHERE groupcode IN (SELECT groupcode FROM st_group WHERE specialization='Nanotechnology' or specialization='Health Research')
+
+
+select studentname, groupcode, (SELECT specialization FROM st_group WHERE st_group.groupcode=students.groupcode) FROM students
+
+
+EXIST существует
+ANY хотябы один
+ALL все
+SELECT studentid, studentname FROM students WHERE EXISTS (SELECT * FROM phone_list WHERE students.studentid=phone_list.studentid)
+SELECT studentid, studentname FROM students WHERE NOT EXISTS (SELECT * FROM phone_list WHERE students.studentid=phone_list.studentid)
+
+SELECT studentname FROM students WHERE 2=ANY(SELECT DISTINCT grade FROM exam_result WHERE students.studentid=exam_result.studentid)
+SELECT StudentName FROM STUDENTS WHERE StudentId
+IN (SELECT DISTINCT StudentId FROM EXAM_RESULT WHERE Grade = 2)
+
+SELECT studentid, studentname FROM students WHERE 2=ANY(SELECT grade FROM exam_result WHERE students.studentid=exam_result.studentid)
+
+SELECT studentid, studentname FROM students WHERE 3<ALL(SELECT grade FROM exam_result WHERE students.studentid=exam_result.studentid)
+
+SELECT StudentName FROM STUDENTS WHERE StudentId
+IN (SELECT StudentId FROM EXAM_RESULT WHERE Grade = MAX(Grade))
+
+SELECT (SELECT TeacherName FROM TEACHER WHERE
+TEACHER.TeacherId = EXAM_SHEET.TeacherId) AS TeacherName, ExamDate, ClassRoom FROM EXAM_SHEET
+
+SELECT (SELECT CourseTitle FROM Course WHERE
+Course.CourseId = EXAM_SHEET.CourseId) AS CourseTitle, ExamDate FROM EXAM_SHEET
