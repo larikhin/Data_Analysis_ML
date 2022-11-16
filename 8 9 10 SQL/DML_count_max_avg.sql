@@ -5,7 +5,7 @@ SUM (numbers)
 
 SELECT
 FROM
-WHERE фильтрация аргументов перед функцией
+WHERE фильтрация аргументов перед функцией LIKE '%text%' 't__t' 't___' 't%' '___t' '%t'
 GROUP BY группировка
 HAVING фильтрация результатов вычисления функции
 ORDER BY ... DESC ASC сортировка
@@ -25,6 +25,7 @@ SELECT groupcode, COUNT(*) from students GROUP by groupcode HAVING COUNT(*)>3 AN
 SELECT groupcode, count(*) FROM students WHERE studentid < 345577 group BY groupcode HAVING COUNT(*)<8
 SELECT groupcode, count(*) FROM students group BY groupcode ORDER by COUNT(*) ASC
 SELECT groupcode, count(*) FROM students group BY groupcode ORDER by COUNT(*) DESC
+select count(distinct carrier_board_num) from track where route_number = 31 and id_vehicle = 1
 
 
 SELECT count(*) FROM Exam_Result WHERE StudentId = 345576
