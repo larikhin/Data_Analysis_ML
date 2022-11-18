@@ -81,3 +81,6 @@ INSERT INTO students (  studentid,
 DELETE FROM students WHERE studentid=1231221;
 DELETE FROM students WHERE studentname like '%ily%';
 
+TRUNCATE TABLE students; /*Delete all data*/
+
+
