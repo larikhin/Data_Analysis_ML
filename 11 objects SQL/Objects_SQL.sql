@@ -61,3 +61,66 @@ SELECT DISTINCT examdate FROM exam_sheet WHERE groupcode LIKE 'B%'
 SELECT DISTINCT examdate FROM exam_sheet WHERE groupcode LIKE 'B%' AND classroom = 2410
 SELECT Count(*) AS Number_of_exams FROM exam_sheet WHERE groupcode LIKE 'B%' AND classroom = 2410 
 SELECT Count(*)    Number_of_exams FROM exam_sheet WHERE groupcode LIKE 'B%' AND classroom = 2410
+
+CAST
+CAST (value) AS (type)
+SELECT CAST ('5' as INTEGER)
+SELECT CAST (5 as DECIMAL(3,2))
+SELECT CAST (5 as char(7))
+SELECT CAST (5 AS INTEGER) /* FROM DUAL in Oracle*/
+SELECT CAST (studentid AS INTEGER) from students
+SELECT CAST (studentid AS CHAR(7)) from students
+SELECT 'number - ' || CAST (studentid AS CHAR(7)) from students
+
+SELECT CURRENT_CATALOG
+SELECT CURRENT_USER
+SELECT CURRENT_TIME
+SELECT CURRENT_DATE
+SELECT CURRENT_TIMESTAMP
+SELECT CURRENT_ROLE
+SELECT CURRENT_SCHEMA
+
+oracle SELECT SYSDATE FROM DUAL
+PostgreSQL SELECT CURRENT_DATE
+SQLserver SELECT GETDATE()
+
+SELECT CAST ('01/01/2017' as DATE)
+SELECT CAST (CURRENT_DATE as TEXT)
+SELECT CAST ('01.01.2017' as DATE)
+SELECT CAST (CURRENT_TIMESTAMP as CHAR(28))
+SELECT to_date('28/02/2020 18:24','DD/MM/YYYY HH24:MI')
+SELECT to_char (CURRENT_DATE,'YYYY-MM-DD')
+ADD_MONTHS
+CURRENT_DATE / NOW / GETDATE
+EXTRACT / DATE_PART / DATEPART
+NEXT_DAY
+-/ DATEDIFF
+TRUNC / DATE_TRUNC
+SELECT TO_DATE('28/02/2020','DD/MM/YYYY') + 100 /*ADD 100 DAYS*/
+SELECT MAX(birthdate)-MIN(birthdate) FROM students
+SELECT EXTRACT (YEAR FROM max(birthdate)) FROM students
+SELECT EXTRACT (MONTH FROM max(birthdate)) FROM students
+SELECT EXTRACT (DAY FROM max(birthdate)) FROM students
+SELECT EXTRACT (MONTH FROM CURRENT_DATE)
+
+SELECT * FROM students WHERE EXTRACT (MONTH FROM birthdate)=5 
+SELECT * FROM students WHERE EXTRACT (MONTH FROM birthdate)=5 ORDER BY EXTRACT (DAY FROM birthdate)
+
+ABS
+SIGN
+POWER
+SQRT
+TRUNC
+ROUND
+MOD
+SIN
+COS
+LOG
+LN
+EXP
+CEIL
+
+SELECT AVG(grade), studentid FROM exam_result GROUP BY studentid
+SELECT trunc(AVG(grade)), studentid FROM exam_result GROUP BY studentid /*округление вниз*/
+SELECT trunc(AVG(grade),2), studentid FROM exam_result GROUP BY studentid /*округление вниз*/
+SELECT CEIL(AVG(grade)), studentid FROM exam_result GROUP BY studentid /*округление вверх*/
