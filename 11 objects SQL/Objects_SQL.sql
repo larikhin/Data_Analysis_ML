@@ -124,3 +124,14 @@ SELECT AVG(grade), studentid FROM exam_result GROUP BY studentid
 SELECT trunc(AVG(grade)), studentid FROM exam_result GROUP BY studentid /*округление вниз*/
 SELECT trunc(AVG(grade),2), studentid FROM exam_result GROUP BY studentid /*округление вниз*/
 SELECT CEIL(AVG(grade)), studentid FROM exam_result GROUP BY studentid /*округление вверх*/
+
+
+SELECT studentname, Extract(year FROM birthdate) AS birth_year
+FROM students WHERE birthdate IS NOT NULL ORDER BY studentname
+SELECT studentname FROM students WHERE EXTRACT (MONTH FROM birthdate)=(SELECT EXTRACT (MONTH FROM CURRENT_DATE))
+SELECT UPPER(studentname) from students ORDER by birthdate
+SELECT studentid, trunc(avg(grade), 2) FROM exam_result GROUP by studentid
+SELECT studentid, Round(Avg(grade), 2) AS avg_grade FROM exam_result
+GROUP BY studentid ORDER BY avg_grade DESC
+
+
